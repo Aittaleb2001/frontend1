@@ -1,0 +1,289 @@
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                                            <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2"
+                                (click)="openCreateQuittancePrime('quittancePrime')"></button>
+
+
+                    <button pButton pRipple label="Recherche"
+                            icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
+                            class="p-button-success p-mr-2 p-mb-2"
+                            (click)="this.findByCriteriaShow = !this.findByCriteriaShow"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label="Exporter" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.primeNetteMin"
+                                                             id="1-1"></p-inputNumber>
+                                              <label for="1-1">Prime nette Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.primeNetteMax"
+                                                             id="1-2"></p-inputNumber>
+                                             <label for="1-2">Prime nette Max</label>
+                                       </span>
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.taxeMin"
+                                                             id="2-1"></p-inputNumber>
+                                              <label for="2-1">Taxe Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.taxeMax"
+                                                             id="2-2"></p-inputNumber>
+                                             <label for="2-2">Taxe Max</label>
+                                       </span>
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="3"
+                                           type="text"  [(ngModel)]="searchQuittancePrime.accessoires">
+                                    <label for="3">Accessoires</label>
+                                </span>
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.totalTtcMin"
+                                                             id="4-1"></p-inputNumber>
+                                              <label for="4-1">Total ttc Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.totalTtcMax"
+                                                             id="4-2"></p-inputNumber>
+                                             <label for="4-2">Total ttc Max</label>
+                                       </span>
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.totalQuittanceMin"
+                                                             id="5-1"></p-inputNumber>
+                                              <label for="5-1">Total quittance Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.totalQuittanceMax"
+                                                             id="5-2"></p-inputNumber>
+                                             <label for="5-2">Total quittance Max</label>
+                                       </span>
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.totalPayeMin"
+                                                             id="6-1"></p-inputNumber>
+                                              <label for="6-1">Total paye Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.totalPayeMax"
+                                                             id="6-2"></p-inputNumber>
+                                             <label for="6-2">Total paye Max</label>
+                                       </span>
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.restMin"
+                                                             id="7-1"></p-inputNumber>
+                                              <label for="7-1">Rest Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchQuittancePrime.restMax"
+                                                             id="7-2"></p-inputNumber>
+                                             <label for="7-2">Rest Max</label>
+                                       </span>
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="contrats" [(ngModel)]="searchQuittancePrime.contratVo"
+                                        id="8"
+                                        [filter]="true" [showClear]="true"  placeholder="Contrat"
+                                        optionLabel="numAttestation">
+                                </p-dropdown>
+                            </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="Valider" icon="pi pi-sort-amount-down"
+                            class="p-button-info p-mr-2" (click)="searchRequest()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="quittancePrimes" [columns]="cols" [rows]="4" [paginator]="true"
+                    [globalFilterFields]="['primeNette', 'taxe', 'accessoires', 'totalTtc', 'totalQuittance', 'totalPaye', 'rest', 'contratVonumAttestation']" [(selection)]="selectedQuittancePrime"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                                      currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords}"
+                    [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste des quittance primes</h5>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="Chercher..." (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+
+                                
+                                <th pSortableColumn="primeNette">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Prime nette</span>
+                                        <p-sortIcon field="primeNette"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="taxe">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Taxe</span>
+                                        <p-sortIcon field="taxe"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="accessoires">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Accessoires</span>
+                                        <p-sortIcon field="accessoires"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="totalTtc">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Total ttc</span>
+                                        <p-sortIcon field="totalTtc"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="totalQuittance">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Total quittance</span>
+                                        <p-sortIcon field="totalQuittance"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="totalPaye">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Total paye</span>
+                                        <p-sortIcon field="totalPaye"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="rest">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Rest</span>
+                                        <p-sortIcon field="rest"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="contrat">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Contrat</span>
+                                        <p-sortIcon field="contrat"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-quittancePrime>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="quittancePrime"></p-tableCheckbox>
+                        </td>
+                            
+                                 <td>{{quittancePrime.primeNette}}</td>
+                            
+
+                            
+                                 <td>{{quittancePrime.taxe}}</td>
+                            
+
+                            
+                                 <td>{{quittancePrime.accessoires}}</td>
+                            
+
+                            
+                                 <td>{{quittancePrime.totalTtc}}</td>
+                            
+
+                            
+                                 <td>{{quittancePrime.totalQuittance}}</td>
+                            
+
+                            
+                                 <td>{{quittancePrime.totalPaye}}</td>
+                            
+
+                            
+                                 <td>{{quittancePrime.rest}}</td>
+                            
+
+                            
+                                <td>{{quittancePrime.contratVo?.numAttestation}}</td>
+                            
+
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success p-mr-2"
+                                    (click)="editQuittancePrime(quittancePrime)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2"
+                                    (click)="viewQuittancePrime(quittancePrime)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2"
+                                    (click)="deleteQuittancePrime(quittancePrime)"></button>
+
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning"
+                                    (click)="duplicateQuittancePrime(quittancePrime)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale
+                        il {{quittancePrimes ? quittancePrimes.length == 1 ? 'y a' : 'y a' : 'y a' }} {{quittancePrimes ? quittancePrimes.length : 0 }} {{quittancePrimes ? quittancePrimes.length == 1 ? 'quittance prime' : 'quittance primes' : 0 }}
+                        .
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-quittance-prime-create-gestionnaire></app-quittance-prime-create-gestionnaire>
+        <app-quittance-prime-edit-gestionnaire></app-quittance-prime-edit-gestionnaire>
+        <app-quittance-prime-view-gestionnaire></app-quittance-prime-view-gestionnaire>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

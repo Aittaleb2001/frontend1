@@ -1,0 +1,57 @@
+
+<p-dialog [(visible)]="viewContratGarantieDialog" [style]="{width: '70vw'}"
+        header="Contrat garantie" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Contrat garantie">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="1">Contrat</label>
+                                    <p-dropdown [options]="contrats" [(ngModel)]="selectedContratGarantie.contratVo"
+                                            id="1" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="numAttestation"
+                                            placeholder="Contrat">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="2">Garantie</label>
+                                    <p-dropdown [options]="garanties" [(ngModel)]="selectedContratGarantie.garantieVo"
+                                            id="2" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="libelle"
+                                            placeholder="Garantie">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+<!--            <app-contrat-create-admin></app-contrat-create-admin>-->
+<!--            <app-garantie-create-admin></app-garantie-create-admin>-->
+
+
+
+</p-dialog>
+
+
+

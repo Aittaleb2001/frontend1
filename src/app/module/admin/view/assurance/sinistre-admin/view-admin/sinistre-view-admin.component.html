@@ -1,0 +1,97 @@
+
+<p-dialog [(visible)]="viewSinistreDialog" [style]="{width: '70vw'}"
+        header="Sinistre" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Sinistre">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="1">Reference</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Reference"  [(ngModel)]="selectedSinistre.reference"
+                                           id="1" [(ngModel)]="selectedSinistre.reference"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="2">Description</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Description"  [(ngModel)]="selectedSinistre.description"
+                                           id="2" [(ngModel)]="selectedSinistre.description"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="3">Cause</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Cause"  [(ngModel)]="selectedSinistre.cause"
+                                           id="3" [(ngModel)]="selectedSinistre.cause"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="4">Objet</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Objet"  [(ngModel)]="selectedSinistre.objet"
+                                           id="4" [(ngModel)]="selectedSinistre.objet"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="5">Type sinistre</label>
+                                    <p-dropdown [options]="typeSinistres" [(ngModel)]="selectedSinistre.typeSinistreVo"
+                                            id="5" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="libelle"
+                                            placeholder="Type sinistre">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="6">Client</label>
+                                    <p-dropdown [options]="clients" [(ngModel)]="selectedSinistre.clientVo"
+                                            id="6" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="cin"
+                                            placeholder="Client">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-type-sinistre-create-admin></app-type-sinistre-create-admin>
+            <app-client-create-admin></app-client-create-admin>
+
+
+
+</p-dialog>
+
+
+

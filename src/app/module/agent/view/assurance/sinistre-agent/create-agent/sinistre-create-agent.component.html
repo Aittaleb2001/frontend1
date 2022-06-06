@@ -1,0 +1,110 @@
+        <p-dialog [(visible)]="createSinistreDialog" [style]="{width: '70vw'}"
+                header="Sinistre" [modal]="true"
+                styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="Sinistre">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="1">Reference<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Reference"
+                                                   id="1" [(ngModel)]="selectedSinistre.reference"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validSinistreReference}"  />
+                                            <small class='p-error' *ngIf='!validSinistreReference'>Reference est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="2">Description</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Description"
+                                                   id="2" [(ngModel)]="selectedSinistre.description"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="3">Cause</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Cause"
+                                                   id="3" [(ngModel)]="selectedSinistre.cause"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="4">Objet</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Objet"
+                                                   id="4" [(ngModel)]="selectedSinistre.objet"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-11 p-md-5">
+                                            <label for="5">Type sinistre<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="typeSinistres" [(ngModel)]="selectedSinistre.typeSinistreVo"
+                                                    id="5" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="libelle"
+                                                    placeholder="Type sinistre" [ngClass]="{'ng-invalid ng-dirty' : !validSinistreTypeSinistre}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validSinistreTypeSinistre'>TypeSinistre est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatetypeSinistre('typeSinistre')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-11 p-md-5">
+                                            <label for="6">Client</label>
+                                            <p-dropdown [options]="clients" [(ngModel)]="selectedSinistre.clientVo"
+                                                    id="6" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="cin"
+                                                    placeholder="Client"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreateclient('client')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideCreateDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-type-sinistre-create-agent></app-type-sinistre-create-agent>
+                    <app-client-create-agent></app-client-create-agent>
+
+
+    </p-dialog>

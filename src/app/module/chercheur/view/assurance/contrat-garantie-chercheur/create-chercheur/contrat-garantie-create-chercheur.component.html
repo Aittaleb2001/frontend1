@@ -1,0 +1,66 @@
+        <p-dialog [(visible)]="createContratGarantieDialog" [style]="{width: '70vw'}"
+                header="Contrat garantie" [modal]="true"
+                styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="Contrat garantie">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-11 p-md-5">
+                                            <label for="1">Contrat<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="contrats" [(ngModel)]="selectedContratGarantie.contratVo"
+                                                    id="1" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="numAttestation"
+                                                    placeholder="Contrat" [ngClass]="{'ng-invalid ng-dirty' : !validContratGarantieContrat}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validContratGarantieContrat'>Contrat est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatecontrat('contrat')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-11 p-md-5">
+                                            <label for="2">Garantie<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="garanties" [(ngModel)]="selectedContratGarantie.garantieVo"
+                                                    id="2" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="libelle"
+                                                    placeholder="Garantie" [ngClass]="{'ng-invalid ng-dirty' : !validContratGarantieGarantie}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validContratGarantieGarantie'>Garantie est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreategarantie('garantie')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideCreateDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-contrat-create-chercheur></app-contrat-create-chercheur>
+                    <app-garantie-create-chercheur></app-garantie-create-chercheur>
+
+
+    </p-dialog>

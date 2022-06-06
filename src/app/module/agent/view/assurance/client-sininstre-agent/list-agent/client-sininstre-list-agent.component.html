@@ -1,0 +1,342 @@
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                                            <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2"
+                                (click)="openCreateClientSininstre('clientSininstre')"></button>
+
+
+                    <button pButton pRipple label="Recherche"
+                            icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
+                            class="p-button-success p-mr-2 p-mb-2"
+                            (click)="this.findByCriteriaShow = !this.findByCriteriaShow"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label="Exporter" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="1"
+                                           type="text"  [(ngModel)]="searchClientSininstre.ref">
+                                    <label for="1">Ref</label>
+                                </span>
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="2"
+                                           type="text"  [(ngModel)]="searchClientSininstre.numPolice">
+                                    <label for="2">Num police</label>
+                                </span>
+
+                        <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    class="p-mr-2" [(ngModel)]="searchClientSininstre.dateSinistreMin"
+                                    id="3-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="3-1">Date sinistre Min</label>
+                        </span>
+
+                         <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    class="p-mr-2" [(ngModel)]="searchClientSininstre.dateSinistreMax"
+                                    id="3-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="3-2">Date sinistre Max</label>
+                        </span>
+
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="4"
+                                           type="text"  [(ngModel)]="searchClientSininstre.responsabilite">
+                                    <label for="4">Responsabilite</label>
+                                </span>
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchClientSininstre.numOrdreMin"
+                                                             id="5-1"></p-inputNumber>
+                                              <label for="5-1">Num ordre Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchClientSininstre.numOrdreMax"
+                                                             id="5-2"></p-inputNumber>
+                                             <label for="5-2">Num ordre Max</label>
+                                       </span>
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="6"
+                                           type="text"  [(ngModel)]="searchClientSininstre.refReglement">
+                                    <label for="6">Ref reglement</label>
+                                </span>
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchClientSininstre.montantExpertiseMin"
+                                                             id="7-1"></p-inputNumber>
+                                              <label for="7-1">Montant expertise Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchClientSininstre.montantExpertiseMax"
+                                                             id="7-2"></p-inputNumber>
+                                             <label for="7-2">Montant expertise Max</label>
+                                       </span>
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchClientSininstre.montantIndemniserMin"
+                                                             id="8-1"></p-inputNumber>
+                                              <label for="8-1">Montant indemniser Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchClientSininstre.montantIndemniserMax"
+                                                             id="8-2"></p-inputNumber>
+                                             <label for="8-2">Montant indemniser Max</label>
+                                       </span>
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="clients" [(ngModel)]="searchClientSininstre.clientVo"
+                                        id="10"
+                                        [filter]="true" [showClear]="true"  placeholder="Client"
+                                        optionLabel="cin">
+                                </p-dropdown>
+                            </span>
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="sinistres" [(ngModel)]="searchClientSininstre.sinistreVo"
+                                        id="11"
+                                        [filter]="true" [showClear]="true"  placeholder="Sinistre"
+                                        optionLabel="reference">
+                                </p-dropdown>
+                            </span>
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="quittanceIndemnisers" [(ngModel)]="searchClientSininstre.quittanceIndemniserVo"
+                                        id="12"
+                                        [filter]="true" [showClear]="true"  placeholder="Quittance indemniser"
+                                        optionLabel="reference">
+                                </p-dropdown>
+                            </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="Valider" icon="pi pi-sort-amount-down"
+                            class="p-button-info p-mr-2" (click)="searchRequest()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="clientSininstres" [columns]="cols" [rows]="4" [paginator]="true"
+                    [globalFilterFields]="['ref', 'numPolice', 'dateSinistre', 'responsabilite', 'numOrdre', 'refReglement', 'montantExpertise', 'montantIndemniser', 'clientVocin', 'sinistreVoreference', 'quittanceIndemniserVoreference']" [(selection)]="selectedClientSininstre"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                                      currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords}"
+                    [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste des client sininstres</h5>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="Chercher..." (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+
+                                
+                                <th pSortableColumn="ref">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Ref</span>
+                                        <p-sortIcon field="ref"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="numPolice">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Num police</span>
+                                        <p-sortIcon field="numPolice"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="dateSinistre">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Date sinistre</span>
+                                        <p-sortIcon field="dateSinistre"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="responsabilite">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Responsabilite</span>
+                                        <p-sortIcon field="responsabilite"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="numOrdre">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Num ordre</span>
+                                        <p-sortIcon field="numOrdre"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="refReglement">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Ref reglement</span>
+                                        <p-sortIcon field="refReglement"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="montantExpertise">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Montant expertise</span>
+                                        <p-sortIcon field="montantExpertise"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="montantIndemniser">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Montant indemniser</span>
+                                        <p-sortIcon field="montantIndemniser"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+
+                                
+                                <th pSortableColumn="client">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Client</span>
+                                        <p-sortIcon field="client"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                <!-- 
+                                <th pSortableColumn="sinistre">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Sinistre</span>
+                                        <p-sortIcon field="sinistre"></p-sortIcon>
+                                    </div>
+                                </th>
+                                --> 
+
+
+                                <!-- 
+                                <th pSortableColumn="quittanceIndemniser">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Quittance indemniser</span>
+                                        <p-sortIcon field="quittanceIndemniser"></p-sortIcon>
+                                    </div>
+                                </th>
+                                --> 
+
+
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-clientSininstre>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="clientSininstre"></p-tableCheckbox>
+                        </td>
+                            
+                                 <td>{{clientSininstre.ref}}</td>
+                            
+
+                            
+                                 <td>{{clientSininstre.numPolice}}</td>
+                            
+
+                            
+                                <td>{{clientSininstre.dateSinistre | date:'dd-M-yyyy' }}</td>
+                            
+
+                            
+                                 <td>{{clientSininstre.responsabilite}}</td>
+                            
+
+                            
+                                 <td>{{clientSininstre.numOrdre}}</td>
+                            
+
+                            
+                                 <td>{{clientSininstre.refReglement}}</td>
+                            
+
+                            
+                                 <td>{{clientSininstre.montantExpertise}}</td>
+                            
+
+                            
+                                 <td>{{clientSininstre.montantIndemniser}}</td>
+                            
+
+                             <!-- 
+                                <td>{{clientSininstre.clientVo?.cin}}</td>
+                             --> 
+
+                             <!-- 
+                                <td>{{clientSininstre.sinistreVo?.reference}}</td>
+                             --> 
+
+                             <!-- 
+                                <td>{{clientSininstre.quittanceIndemniserVo?.reference}}</td>
+                             --> 
+
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success p-mr-2"
+                                    (click)="editClientSininstre(clientSininstre)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2"
+                                    (click)="viewClientSininstre(clientSininstre)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2"
+                                    (click)="deleteClientSininstre(clientSininstre)"></button>
+
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning"
+                                    (click)="duplicateClientSininstre(clientSininstre)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale
+                        il {{clientSininstres ? clientSininstres.length == 1 ? 'y a' : 'y a' : 'y a' }} {{clientSininstres ? clientSininstres.length : 0 }} {{clientSininstres ? clientSininstres.length == 1 ? 'client sininstre' : 'client sininstres' : 0 }}
+                        .
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-client-sininstre-create-agent></app-client-sininstre-create-agent>
+        <app-client-sininstre-edit-agent></app-client-sininstre-edit-agent>
+        <app-client-sininstre-view-agent></app-client-sininstre-view-agent>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

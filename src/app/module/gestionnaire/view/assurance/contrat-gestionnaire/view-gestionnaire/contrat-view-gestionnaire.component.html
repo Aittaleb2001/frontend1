@@ -1,0 +1,158 @@
+
+<p-dialog [(visible)]="viewContratDialog" [style]="{width: '70vw'}"
+        header="Contrat" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Contrat">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="1">Num police</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Num police"  [(ngModel)]="selectedContrat.numPolice"
+                                           id="1" [(ngModel)]="selectedContrat.numPolice"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="2">Num attestation</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Num attestation"  [(ngModel)]="selectedContrat.numAttestation"
+                                           id="2" [(ngModel)]="selectedContrat.numAttestation"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="3">Date effet</label>
+                                    <p-calendar id="3" [disabled]="true"
+                                                placeholder="Date effet"  [(ngModel)]="selectedContrat.dateEffet"
+                                            dateFormat="{{dateFormat}}"></p-calendar>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="4">Date echeance</label>
+                                    <p-calendar id="4" [disabled]="true"
+                                                placeholder="Date echeance"  [(ngModel)]="selectedContrat.dateEcheance"
+                                            dateFormat="{{dateFormat}}"></p-calendar>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="5">Date signature</label>
+                                    <p-calendar id="5" [disabled]="true"
+                                                placeholder="Date signature"  [(ngModel)]="selectedContrat.dateSignature"
+                                            dateFormat="{{dateFormat}}"></p-calendar>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="6">Periode</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Periode"  [(ngModel)]="selectedContrat.periode"
+                                           id="6" [(ngModel)]="selectedContrat.periode"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="7">Quittance prime</label>
+                                    <p-dropdown [options]="quittancePrimes" [(ngModel)]="selectedContrat.quittancePrimeVo"
+                                            id="7" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="id"
+                                            placeholder="Quittance prime">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="8">Nature contrat</label>
+                                    <p-dropdown [options]="natureContrats" [(ngModel)]="selectedContrat.natureContratVo"
+                                            id="8" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="libelle"
+                                            placeholder="Nature contrat">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="9">Vehicule</label>
+                                    <p-dropdown [options]="vehicules" [(ngModel)]="selectedContrat.vehiculeVo"
+                                            id="9" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="reference"
+                                            placeholder="Vehicule">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="10">Client</label>
+                                    <p-dropdown [options]="clients" [(ngModel)]="selectedContrat.clientVo"
+                                            id="10" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="cin"
+                                            placeholder="Client">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+                    <p-tabPanel header="Contrat garanties">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedContrat.contratGarantiesVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Garantie</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                        <td>{{p.garantieVo?.libelle}}</td>
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-quittance-prime-create-gestionnaire></app-quittance-prime-create-gestionnaire>
+            <app-nature-contrat-create-gestionnaire></app-nature-contrat-create-gestionnaire>
+            <app-vehicule-create-gestionnaire></app-vehicule-create-gestionnaire>
+            <app-client-create-gestionnaire></app-client-create-gestionnaire>
+
+                    <app-garantie-create-gestionnaire></app-garantie-create-gestionnaire>
+
+
+</p-dialog>
+
+
+

@@ -1,0 +1,199 @@
+        <p-dialog [(visible)]="createVehiculeDialog" [style]="{width: '70vw'}"
+                header="Vehicule" [modal]="true"
+                styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="Vehicule">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="1">Reference<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Reference"
+                                                   id="1" [(ngModel)]="selectedVehicule.reference"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeReference}"  />
+                                            <small class='p-error' *ngIf='!validVehiculeReference'>Reference est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="2">Code verification<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Code verification"
+                                                   id="2" [(ngModel)]="selectedVehicule.codeVerification"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeCodeVerification}"  />
+                                            <small class='p-error' *ngIf='!validVehiculeCodeVerification'>CodeVerification est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="3">Matricule<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Matricule"
+                                                   id="3" [(ngModel)]="selectedVehicule.matricule"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeMatricule}"  />
+                                            <small class='p-error' *ngIf='!validVehiculeMatricule'>Matricule est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="4">Cylindree<span style="color: red;">*</span></label>
+                                            <p-inputNumber class="p-mb-2 p-mr-2" id="4"
+                                                           placeholder="Cylindree"
+                                                    [(ngModel)]="selectedVehicule.cylindree" [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeCylindree}"  >
+                                            </p-inputNumber>
+                                            <small class='p-error' *ngIf='!validVehiculeCylindree'>Cylindree est obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="5">Version<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Version"
+                                                   id="5" [(ngModel)]="selectedVehicule.version"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeVersion}"  />
+                                            <small class='p-error' *ngIf='!validVehiculeVersion'>Version est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="6">Poids encharge<span style="color: red;">*</span></label>
+                                            <p-inputNumber class="p-mb-2 p-mr-2" id="6"
+                                                           placeholder="Poids encharge"
+                                                    [(ngModel)]="selectedVehicule.poidsEncharge" [ngClass]="{'ng-invalid ng-dirty' : !validVehiculePoidsEncharge}"  >
+                                            </p-inputNumber>
+                                            <small class='p-error' *ngIf='!validVehiculePoidsEncharge'>PoidsEncharge est obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="7">Nombre places<span style="color: red;">*</span></label>
+                                            <p-inputNumber class="p-mb-2 p-mr-2" id="7"
+                                                           placeholder="Nombre places"
+                                                    [(ngModel)]="selectedVehicule.nombrePlaces" [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeNombrePlaces}"  >
+                                            </p-inputNumber>
+                                            <small class='p-error' *ngIf='!validVehiculeNombrePlaces'>NombrePlaces est obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="8">Puissance fiscale<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Puissance fiscale"
+                                                   id="8" [(ngModel)]="selectedVehicule.puissanceFiscale"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validVehiculePuissanceFiscale}"  />
+                                            <small class='p-error' *ngIf='!validVehiculePuissanceFiscale'>PuissanceFiscale est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-11 p-md-2">
+                                            <label for="9">Carburant<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="carburants" [(ngModel)]="selectedVehicule.carburantVo"
+                                                    id="9" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="libelle"
+                                                    placeholder="Carburant" [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeCarburant}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validVehiculeCarburant'>Carburant est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatecarburant('carburant')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-11 p-md-2">
+                                            <label for="10">Type vehicule</label>
+                                            <p-dropdown [options]="typeVehicules" [(ngModel)]="selectedVehicule.typeVehiculeVo"
+                                                    id="10" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="libelle"
+                                                    placeholder="Type vehicule"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatetypeVehicule('typeVehicule')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-11 p-md-2">
+                                            <label for="11">Client<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="clients" [(ngModel)]="selectedVehicule.clientVo"
+                                                    id="11" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="cin"
+                                                    placeholder="Client" [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeClient}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validVehiculeClient'>Client est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreateclient('client')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-11 p-md-2">
+                                            <label for="12">Contrat<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="contrats" [(ngModel)]="selectedVehicule.contratVo"
+                                                    id="12" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="numAttestation"
+                                                    placeholder="Contrat" [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeContrat}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validVehiculeContrat'>Contrat est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatecontrat('contrat')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-11 p-md-2">
+                                            <label for="13">Marque<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="marques" [(ngModel)]="selectedVehicule.marqueVo"
+                                                    id="13" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="libelle"
+                                                    placeholder="Marque" [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeMarque}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validVehiculeMarque'>Marque est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatemarque('marque')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideCreateDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-carburant-create-gestionnaire></app-carburant-create-gestionnaire>
+                    <app-type-vehicule-create-gestionnaire></app-type-vehicule-create-gestionnaire>
+                    <app-client-create-gestionnaire></app-client-create-gestionnaire>
+                    <app-contrat-create-gestionnaire></app-contrat-create-gestionnaire>
+                    <app-marque-create-gestionnaire></app-marque-create-gestionnaire>
+
+
+    </p-dialog>

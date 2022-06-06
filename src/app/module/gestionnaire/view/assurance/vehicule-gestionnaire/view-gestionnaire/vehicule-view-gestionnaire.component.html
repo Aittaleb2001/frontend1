@@ -1,0 +1,164 @@
+
+<p-dialog [(visible)]="viewVehiculeDialog" [style]="{width: '70vw'}"
+        header="Vehicule" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Vehicule">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="1">Reference</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Reference"  [(ngModel)]="selectedVehicule.reference"
+                                           id="1" [(ngModel)]="selectedVehicule.reference"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="2">Code verification</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Code verification"  [(ngModel)]="selectedVehicule.codeVerification"
+                                           id="2" [(ngModel)]="selectedVehicule.codeVerification"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="3">Matricule</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Matricule"  [(ngModel)]="selectedVehicule.matricule"
+                                           id="3" [(ngModel)]="selectedVehicule.matricule"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="4">Cylindree</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="4" [disabled]="true"
+                                                   placeholder="Cylindree"  [(ngModel)]="selectedVehicule.cylindree"
+                                            [(ngModel)]="selectedVehicule.cylindree"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="5">Version</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Version"  [(ngModel)]="selectedVehicule.version"
+                                           id="5" [(ngModel)]="selectedVehicule.version"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="6">Poids encharge</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="6" [disabled]="true"
+                                                   placeholder="Poids encharge"  [(ngModel)]="selectedVehicule.poidsEncharge"
+                                            [(ngModel)]="selectedVehicule.poidsEncharge"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="7">Nombre places</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="7" [disabled]="true"
+                                                   placeholder="Nombre places"  [(ngModel)]="selectedVehicule.nombrePlaces"
+                                            [(ngModel)]="selectedVehicule.nombrePlaces"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="8">Puissance fiscale</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Puissance fiscale"  [(ngModel)]="selectedVehicule.puissanceFiscale"
+                                           id="8" [(ngModel)]="selectedVehicule.puissanceFiscale"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="9">Carburant</label>
+                                    <p-dropdown [options]="carburants" [(ngModel)]="selectedVehicule.carburantVo"
+                                            id="9" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="libelle"
+                                            placeholder="Carburant">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="10">Type vehicule</label>
+                                    <p-dropdown [options]="typeVehicules" [(ngModel)]="selectedVehicule.typeVehiculeVo"
+                                            id="10" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="libelle"
+                                            placeholder="Type vehicule">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="11">Client</label>
+                                    <p-dropdown [options]="clients" [(ngModel)]="selectedVehicule.clientVo"
+                                            id="11" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="cin"
+                                            placeholder="Client">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="12">Contrat</label>
+                                    <p-dropdown [options]="contrats" [(ngModel)]="selectedVehicule.contratVo"
+                                            id="12" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="numAttestation"
+                                            placeholder="Contrat">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="13">Marque</label>
+                                    <p-dropdown [options]="marques" [(ngModel)]="selectedVehicule.marqueVo"
+                                            id="13" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="libelle"
+                                            placeholder="Marque">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-carburant-create-gestionnaire></app-carburant-create-gestionnaire>
+            <app-type-vehicule-create-gestionnaire></app-type-vehicule-create-gestionnaire>
+            <app-client-create-gestionnaire></app-client-create-gestionnaire>
+            <app-contrat-create-gestionnaire></app-contrat-create-gestionnaire>
+            <app-marque-create-gestionnaire></app-marque-create-gestionnaire>
+
+
+
+</p-dialog>
+
+
+

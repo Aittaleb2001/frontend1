@@ -1,0 +1,371 @@
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                                            <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2"
+                                (click)="openCreateVehicule('vehicule')"></button>
+
+
+                    <button pButton pRipple label="Recherche"
+                            icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
+                            class="p-button-success p-mr-2 p-mb-2"
+                            (click)="this.findByCriteriaShow = !this.findByCriteriaShow"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label="Exporter" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="1"
+                                           type="text"  [(ngModel)]="searchVehicule.reference">
+                                    <label for="1">Reference</label>
+                                </span>
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="2"
+                                           type="text"  [(ngModel)]="searchVehicule.codeVerification">
+                                    <label for="2">Code verification</label>
+                                </span>
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="3"
+                                           type="text"  [(ngModel)]="searchVehicule.matricule">
+                                    <label for="3">Matricule</label>
+                                </span>
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchVehicule.cylindreeMin"
+                                                             id="4-1"></p-inputNumber>
+                                              <label for="4-1">Cylindree Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchVehicule.cylindreeMax"
+                                                             id="4-2"></p-inputNumber>
+                                             <label for="4-2">Cylindree Max</label>
+                                       </span>
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="5"
+                                           type="text"  [(ngModel)]="searchVehicule.version">
+                                    <label for="5">Version</label>
+                                </span>
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchVehicule.poidsEnchargeMin"
+                                                             id="6-1"></p-inputNumber>
+                                              <label for="6-1">Poids encharge Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchVehicule.poidsEnchargeMax"
+                                                             id="6-2"></p-inputNumber>
+                                             <label for="6-2">Poids encharge Max</label>
+                                       </span>
+                                    <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchVehicule.nombrePlacesMin"
+                                                             id="7-1"></p-inputNumber>
+                                              <label for="7-1">Nombre places Min</label>
+                                       </span>
+                                       <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                              <p-inputNumber class="p-mr-2"
+                                                             mode="decimal" [(ngModel)]="searchVehicule.nombrePlacesMax"
+                                                             id="7-2"></p-inputNumber>
+                                             <label for="7-2">Nombre places Max</label>
+                                       </span>
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="8"
+                                           type="text"  [(ngModel)]="searchVehicule.puissanceFiscale">
+                                    <label for="8">Puissance fiscale</label>
+                                </span>
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="carburants" [(ngModel)]="searchVehicule.carburantVo"
+                                        id="9"
+                                        [filter]="true" [showClear]="true"  placeholder="Carburant"
+                                        optionLabel="libelle">
+                                </p-dropdown>
+                            </span>
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="typeVehicules" [(ngModel)]="searchVehicule.typeVehiculeVo"
+                                        id="10"
+                                        [filter]="true" [showClear]="true"  placeholder="Type vehicule"
+                                        optionLabel="libelle">
+                                </p-dropdown>
+                            </span>
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="clients" [(ngModel)]="searchVehicule.clientVo"
+                                        id="11"
+                                        [filter]="true" [showClear]="true"  placeholder="Client"
+                                        optionLabel="cin">
+                                </p-dropdown>
+                            </span>
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="contrats" [(ngModel)]="searchVehicule.contratVo"
+                                        id="12"
+                                        [filter]="true" [showClear]="true"  placeholder="Contrat"
+                                        optionLabel="numAttestation">
+                                </p-dropdown>
+                            </span>
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="marques" [(ngModel)]="searchVehicule.marqueVo"
+                                        id="13"
+                                        [filter]="true" [showClear]="true"  placeholder="Marque"
+                                        optionLabel="libelle">
+                                </p-dropdown>
+                            </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="Valider" icon="pi pi-sort-amount-down"
+                            class="p-button-info p-mr-2" (click)="searchRequest()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="vehicules" [columns]="cols" [rows]="4" [paginator]="true"
+                    [globalFilterFields]="['reference', 'codeVerification', 'matricule', 'cylindree', 'version', 'poidsEncharge', 'nombrePlaces', 'puissanceFiscale', 'carburantVolibelle', 'typeVehiculeVolibelle', 'clientVocin', 'contratVonumAttestation', 'marqueVolibelle']" [(selection)]="selectedVehicule"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                                      currentPageReportTemplate="Les éléments de {first} à {last} sur {totalRecords}"
+                    [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste des vehicules</h5>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="Chercher..." (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+
+                                
+                                <th pSortableColumn="reference">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Reference</span>
+                                        <p-sortIcon field="reference"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="codeVerification">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Code verification</span>
+                                        <p-sortIcon field="codeVerification"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="matricule">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Matricule</span>
+                                        <p-sortIcon field="matricule"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="cylindree">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Cylindree</span>
+                                        <p-sortIcon field="cylindree"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="version">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Version</span>
+                                        <p-sortIcon field="version"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="poidsEncharge">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Poids encharge</span>
+                                        <p-sortIcon field="poidsEncharge"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="nombrePlaces">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Nombre places</span>
+                                        <p-sortIcon field="nombrePlaces"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="puissanceFiscale">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Puissance fiscale</span>
+                                        <p-sortIcon field="puissanceFiscale"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="carburant">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Carburant</span>
+                                        <p-sortIcon field="carburant"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                <!-- 
+                                <th pSortableColumn="typeVehicule">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Type vehicule</span>
+                                        <p-sortIcon field="typeVehicule"></p-sortIcon>
+                                    </div>
+                                </th>
+                                --> 
+
+
+                                <!-- 
+                                <th pSortableColumn="client">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Client</span>
+                                        <p-sortIcon field="client"></p-sortIcon>
+                                    </div>
+                                </th>
+                                --> 
+
+
+                                <!-- 
+                                <th pSortableColumn="contrat">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Contrat</span>
+                                        <p-sortIcon field="contrat"></p-sortIcon>
+                                    </div>
+                                </th>
+                                --> 
+
+
+                                <!-- 
+                                <th pSortableColumn="marque">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Marque</span>
+                                        <p-sortIcon field="marque"></p-sortIcon>
+                                    </div>
+                                </th>
+                                --> 
+
+
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-vehicule>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="vehicule"></p-tableCheckbox>
+                        </td>
+                            
+                                 <td>{{vehicule.reference}}</td>
+                            
+
+                            
+                                 <td>{{vehicule.codeVerification}}</td>
+                            
+
+                            
+                                 <td>{{vehicule.matricule}}</td>
+                            
+
+                            
+                                 <td>{{vehicule.cylindree}}</td>
+                            
+
+                            
+                                 <td>{{vehicule.version}}</td>
+                            
+
+                            
+                                 <td>{{vehicule.poidsEncharge}}</td>
+                            
+
+                            
+                                 <td>{{vehicule.nombrePlaces}}</td>
+                            
+
+                            
+                                 <td>{{vehicule.puissanceFiscale}}</td>
+                            
+
+                             <!-- 
+                                <td>{{vehicule.carburantVo?.libelle}}</td>
+                             --> 
+
+                             <!-- 
+                                <td>{{vehicule.typeVehiculeVo?.libelle}}</td>
+                             --> 
+
+                             <!-- 
+                                <td>{{vehicule.clientVo?.cin}}</td>
+                             --> 
+
+                             <!-- 
+                                <td>{{vehicule.contratVo?.numAttestation}}</td>
+                             --> 
+
+                             <!-- 
+                                <td>{{vehicule.marqueVo?.libelle}}</td>
+                             --> 
+
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success p-mr-2"
+                                    (click)="editVehicule(vehicule)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2"
+                                    (click)="viewVehicule(vehicule)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2"
+                                    (click)="deleteVehicule(vehicule)"></button>
+
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning"
+                                    (click)="duplicateVehicule(vehicule)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale
+                        il {{vehicules ? vehicules.length == 1 ? 'y a' : 'y a' : 'y a' }} {{vehicules ? vehicules.length : 0 }} {{vehicules ? vehicules.length == 1 ? 'vehicule' : 'vehicules' : 0 }}
+                        .
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-vehicule-create-gestionnaire></app-vehicule-create-gestionnaire>
+        <app-vehicule-edit-gestionnaire></app-vehicule-edit-gestionnaire>
+        <app-vehicule-view-gestionnaire></app-vehicule-view-gestionnaire>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

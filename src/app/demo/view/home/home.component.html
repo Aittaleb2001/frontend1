@@ -1,0 +1,43 @@
+<div class="p-px-4 ">
+    <br><br>
+    <div class="p-d-flex p-flex-column p-jc-center p-pb-5 p-mx-auto p-ai-center">
+        <img src="assets/images/acceuil.png" class="fostrap-logo" /><br>
+        <h1 class="heading"> Bienvenue sur votre application </h1>
+    </div>
+    <div class="p-grid">
+        <div class="p-field p-col-12 p-md-1">
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+            <p-card (click)="redirectAgent()" header="Espace Agent" class="card"
+                    [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+                <ng-template pTemplate="header">
+                    <img class="img-card" src="assets/images/agent.jpg">
+                </ng-template>
+                <p>describe!</p>
+            </p-card>
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+            <p-card (click)="redirectAdmin()" header="Espace Administrateur" class="card"
+                    [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+                <ng-template pTemplate="header">
+                    <img class="img-card" src="assets/images/admin.jpg">
+                </ng-template>
+                <p>describe!</p>
+            </p-card>
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+            <p-card (click)="redirectGestionnaire()" header="Espace Gestionnaire" class="card"
+                    [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+                <ng-template pTemplate="header">
+                    <img class="img-card" src="assets/images/gestionnaire.jpg">
+                </ng-template>
+                <p>describe!</p>
+            </p-card>
+        </div>
+
+        <div class="p-field p-col-12 p-md-1">
+        </div>
+    </div>
+</div>
+<br><br><br><br>
+<app-footer></app-footer>

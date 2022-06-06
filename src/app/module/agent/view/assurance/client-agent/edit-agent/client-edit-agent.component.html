@@ -1,0 +1,680 @@
+        <p-dialog [(visible)]="editClientDialog" [style]="{width: '70vw'}"
+                header="Client" [modal]="true"
+                styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="Client">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="1">Reference<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Reference"
+                                                   id="1" [(ngModel)]="selectedClient.reference"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validClientReference}"  />
+                                            <small class='p-error' *ngIf='!validClientReference'>Reference est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="2">Cin<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Cin"
+                                                   id="2" [(ngModel)]="selectedClient.cin"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validClientCin}"  />
+                                            <small class='p-error' *ngIf='!validClientCin'>Cin est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="3">Nom<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Nom"
+                                                   id="3" [(ngModel)]="selectedClient.nom"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validClientNom}"  />
+                                            <small class='p-error' *ngIf='!validClientNom'>Nom est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="4">Prenom<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Prenom"
+                                                   id="4" [(ngModel)]="selectedClient.prenom"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validClientPrenom}"  />
+                                            <small class='p-error' *ngIf='!validClientPrenom'>Prenom est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="5">Activite<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Activite"
+                                                   id="5" [(ngModel)]="selectedClient.activite"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validClientActivite}"  />
+                                            <small class='p-error' *ngIf='!validClientActivite'>Activite est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="6">Adresse<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Adresse"
+                                                   id="6" [(ngModel)]="selectedClient.adresse"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validClientAdresse}"  />
+                                            <small class='p-error' *ngIf='!validClientAdresse'>Adresse est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="7">Datede naissance<span style="color: red;">*</span></label>
+                                            <p-calendar id="7"
+                                                        placeholder="Datede naissance"  [(ngModel)]="selectedClient.datedeNaissance"
+                                                    dateFormat="{{dateFormat}}" [ngClass]="{'ng-invalid ng-dirty' : !validClientDatedeNaissance}"  >
+                                            </p-calendar>
+                                            <small class='p-error' *ngIf='!validClientDatedeNaissance'>DatedeNaissance est obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="8">Num telephone<span style="color: red;">*</span></label>
+                                            <p-inputNumber class="p-mb-2 p-mr-2" id="8"
+                                                           placeholder="Num telephone"
+                                                    [(ngModel)]="selectedClient.numTelephone" [ngClass]="{'ng-invalid ng-dirty' : !validClientNumTelephone}"  >
+                                            </p-inputNumber>
+                                            <small class='p-error' *ngIf='!validClientNumTelephone'>NumTelephone est obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-11 p-md-3">
+                                            <label for="9">Type client<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="typeClients" [(ngModel)]="selectedClient.typeClientVo"
+                                                    id="9" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="libelle"
+                                                    placeholder="Type client" [ngClass]="{'ng-invalid ng-dirty' : !validClientTypeClient}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validClientTypeClient'>TypeClient est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatetypeClient('typeClient')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+                            <p-tabPanel header="Client sininstres">
+                                <p-tabView>
+                                    <p-tabPanel header="Création">
+                                        <div class="p-grid">
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="1">Ref<span style="color: red;">*</span></label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Ref"
+                                                                       id="1" [(ngModel)]="selectedClientSininstres.ref"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstresRef}"  >
+                                                                <small class='p-error' *ngIf='!validClientSininstresRef'>Ref est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="2">Num police</label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Num police"
+                                                                       id="2" [(ngModel)]="selectedClientSininstres.numPolice"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="3">Date sinistre<span style="color: red;">*</span></label>
+                                                                <p-calendar id="3"
+                                                                            placeholder="Date sinistre"
+                                                                        [(ngModel)]="selectedClientSininstres.dateSinistre"
+                                                                        dateFormat="{{dateFormat}}" [showIcon]="true"  [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstresDateSinistre}" ></p-calendar>
+                                                                <small class='p-error' *ngIf='!validClientSininstresDateSinistre'>DateSinistre est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="4">Responsabilite</label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Responsabilite"
+                                                                       id="4" [(ngModel)]="selectedClientSininstres.responsabilite"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="5">Num ordre</label>
+                                                                <p-inputNumber class="p-mb-2 p-mr-2" id="numOrdre"
+                                                                               placeholder="Num ordre"  
+                                                                        [(ngModel)]="selectedClientSininstres.numOrdre"></p-inputNumber>
+                                                                
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="6">Ref reglement</label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Ref reglement"
+                                                                       id="6" [(ngModel)]="selectedClientSininstres.refReglement"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="7">Montant expertise<span style="color: red;">*</span></label>
+                                                                <p-inputNumber class="p-mb-2 p-mr-2" id="montantExpertise"
+                                                                               placeholder="Montant expertise"  [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstresMontantExpertise}" 
+                                                                        [(ngModel)]="selectedClientSininstres.montantExpertise"></p-inputNumber>
+                                                                <small class='p-error' *ngIf='!validClientSininstresMontantExpertise'>MontantExpertise est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="8">Montant indemniser<span style="color: red;">*</span></label>
+                                                                <p-inputNumber class="p-mb-2 p-mr-2" id="montantIndemniser"
+                                                                               placeholder="Montant indemniser"  [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstresMontantIndemniser}" 
+                                                                        [(ngModel)]="selectedClientSininstres.montantIndemniser"></p-inputNumber>
+                                                                <small class='p-error' *ngIf='!validClientSininstresMontantIndemniser'>MontantIndemniser est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="9">Observation<span style="color: red;">*</span></label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Observation"
+                                                                       id="9" [(ngModel)]="selectedClientSininstres.observation"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstresObservation}"  >
+                                                                <small class='p-error' *ngIf='!validClientSininstresObservation'>Observation est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-11 p-md-3">
+                                                                <label>Sinistre<span style="color: red;">*</span></label>
+                                                                <p-dropdown [options]="sinistres" [(ngModel)]="selectedClientSininstres.sinistreVo"
+                                                                        id="11"  [filter]="true"
+                                                                        filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="reference"
+                                                                        placeholder="Sinistre"  [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstresSinistre}" 
+                                                                >
+                                                                </p-dropdown>
+                                                                <small class='p-error' *ngIf='!validClientSininstresSinistre'>Sinistre est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button"
+                                                                        icon="pi pi-plus"   (click)="openCreatesinistre('sinistre')"
+                                                                        class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+
+                                                            <div class="p-field p-col-11 p-md-3">
+                                                                <label>Quittance indemniser<span style="color: red;">*</span></label>
+                                                                <p-dropdown [options]="quittanceIndemnisers" [(ngModel)]="selectedClientSininstres.quittanceIndemniserVo"
+                                                                        id="12"  [filter]="true"
+                                                                        filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="reference"
+                                                                        placeholder="Quittance indemniser"  [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstresQuittanceIndemniser}" 
+                                                                >
+                                                                </p-dropdown>
+                                                                <small class='p-error' *ngIf='!validClientSininstresQuittanceIndemniser'>QuittanceIndemniser est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button"
+                                                                        icon="pi pi-plus"   (click)="openCreatequittanceIndemniser('quittanceIndemniser')"
+                                                                        class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+
+                                                <div class="p-field p-col-12 p-md-1">
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                            label="OK" (click)="addClientSininstres()">
+                                                    </button>
+                                                </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Liste">
+                                            <div class="card">
+                                                <p-table [value]="selectedClient.clientSininstresVo" [scrollable]="true"
+                                                        scrollHeight="200px">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                                        <th>Ref</th>
+                                                                        <th>Num police</th>
+                                                                        <th>Date sinistre</th>
+                                                                        <th>Responsabilite</th>
+                                                                        <th>Num ordre</th>
+                                                                        <th>Ref reglement</th>
+                                                                        <th>Montant expertise</th>
+                                                                        <th>Montant indemniser</th>
+                                                                        <th>Observation</th>
+                                                                        <th>Sinistre</th>
+                                                                        <th>Quittance indemniser</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-p>
+                                                        <tr>
+                                                                        <td>{{p.ref}}</td>
+
+                                                                        <td>{{p.numPolice}}</td>
+
+                                                                        <td>{{p.dateSinistre | date: dateFormatColumn}}</td>
+
+                                                                        <td>{{p.responsabilite}}</td>
+
+                                                                        <td>{{p.numOrdre}}</td>
+
+                                                                        <td>{{p.refReglement}}</td>
+
+                                                                        <td>{{p.montantExpertise}}</td>
+
+                                                                        <td>{{p.montantIndemniser}}</td>
+
+                                                                        <td>{{p.observation}}</td>
+
+                                                                    <td>{{p.sinistreVo?.reference}}</td>
+                                                                    <td>{{p.quittanceIndemniserVo?.reference}}</td>
+                                                            <td>
+                                                                <button (click)="deleteClientSininstres(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+
+                            <p-tabPanel header="Vehicule">
+                                <p-tabView>
+                                    <p-tabPanel header="Création">
+                                        <div class="p-grid">
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="1">Reference<span style="color: red;">*</span></label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Reference"
+                                                                       id="1" [(ngModel)]="selectedVehicule.reference"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeReference}"  >
+                                                                <small class='p-error' *ngIf='!validVehiculeReference'>Reference est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="2">Code verification<span style="color: red;">*</span></label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Code verification"
+                                                                       id="2" [(ngModel)]="selectedVehicule.codeVerification"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeCodeVerification}"  >
+                                                                <small class='p-error' *ngIf='!validVehiculeCodeVerification'>CodeVerification est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="3">Matricule<span style="color: red;">*</span></label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Matricule"
+                                                                       id="3" [(ngModel)]="selectedVehicule.matricule"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeMatricule}"  >
+                                                                <small class='p-error' *ngIf='!validVehiculeMatricule'>Matricule est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="4">Cylindree<span style="color: red;">*</span></label>
+                                                                <p-inputNumber class="p-mb-2 p-mr-2" id="cylindree"
+                                                                               placeholder="Cylindree"  [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeCylindree}" 
+                                                                        [(ngModel)]="selectedVehicule.cylindree"></p-inputNumber>
+                                                                <small class='p-error' *ngIf='!validVehiculeCylindree'>Cylindree est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="5">Version<span style="color: red;">*</span></label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Version"
+                                                                       id="5" [(ngModel)]="selectedVehicule.version"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeVersion}"  >
+                                                                <small class='p-error' *ngIf='!validVehiculeVersion'>Version est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="6">Poids encharge<span style="color: red;">*</span></label>
+                                                                <p-inputNumber class="p-mb-2 p-mr-2" id="poidsEncharge"
+                                                                               placeholder="Poids encharge"  [ngClass]="{'ng-invalid ng-dirty' : !validVehiculePoidsEncharge}" 
+                                                                        [(ngModel)]="selectedVehicule.poidsEncharge"></p-inputNumber>
+                                                                <small class='p-error' *ngIf='!validVehiculePoidsEncharge'>PoidsEncharge est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="7">Nombre places<span style="color: red;">*</span></label>
+                                                                <p-inputNumber class="p-mb-2 p-mr-2" id="nombrePlaces"
+                                                                               placeholder="Nombre places"  [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeNombrePlaces}" 
+                                                                        [(ngModel)]="selectedVehicule.nombrePlaces"></p-inputNumber>
+                                                                <small class='p-error' *ngIf='!validVehiculeNombrePlaces'>NombrePlaces est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="8">Puissance fiscale<span style="color: red;">*</span></label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Puissance fiscale"
+                                                                       id="8" [(ngModel)]="selectedVehicule.puissanceFiscale"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validVehiculePuissanceFiscale}"  >
+                                                                <small class='p-error' *ngIf='!validVehiculePuissanceFiscale'>PuissanceFiscale est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-11 p-md-3">
+                                                                <label>Carburant<span style="color: red;">*</span></label>
+                                                                <p-dropdown [options]="carburants" [(ngModel)]="selectedVehicule.carburantVo"
+                                                                        id="9"  [filter]="true"
+                                                                        filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="libelle"
+                                                                        placeholder="Carburant"  [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeCarburant}" 
+                                                                >
+                                                                </p-dropdown>
+                                                                <small class='p-error' *ngIf='!validVehiculeCarburant'>Carburant est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button"
+                                                                        icon="pi pi-plus"   (click)="openCreatecarburant('carburant')"
+                                                                        class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+
+                                                            <div class="p-field p-col-11 p-md-3">
+                                                                <label>Type vehicule</label>
+                                                                <p-dropdown [options]="typeVehicules" [(ngModel)]="selectedVehicule.typeVehiculeVo"
+                                                                        id="10"  [filter]="true"
+                                                                        filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="libelle"
+                                                                        placeholder="Type vehicule"  
+                                                                >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="p-col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button"
+                                                                        icon="pi pi-plus"   (click)="openCreatetypeVehicule('typeVehicule')"
+                                                                        class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+
+                                                            <div class="p-field p-col-11 p-md-3">
+                                                                <label>Contrat<span style="color: red;">*</span></label>
+                                                                <p-dropdown [options]="contrats" [(ngModel)]="selectedVehicule.contratVo"
+                                                                        id="12"  [filter]="true"
+                                                                        filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="numAttestation"
+                                                                        placeholder="Contrat"  [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeContrat}" 
+                                                                >
+                                                                </p-dropdown>
+                                                                <small class='p-error' *ngIf='!validVehiculeContrat'>Contrat est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button"
+                                                                        icon="pi pi-plus"   (click)="openCreatecontrat('contrat')"
+                                                                        class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+
+                                                            <div class="p-field p-col-11 p-md-3">
+                                                                <label>Marque<span style="color: red;">*</span></label>
+                                                                <p-dropdown [options]="marques" [(ngModel)]="selectedVehicule.marqueVo"
+                                                                        id="13"  [filter]="true"
+                                                                        filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="libelle"
+                                                                        placeholder="Marque"  [ngClass]="{'ng-invalid ng-dirty' : !validVehiculeMarque}" 
+                                                                >
+                                                                </p-dropdown>
+                                                                <small class='p-error' *ngIf='!validVehiculeMarque'>Marque est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button"
+                                                                        icon="pi pi-plus"   (click)="openCreatemarque('marque')"
+                                                                        class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+
+                                                <div class="p-field p-col-12 p-md-1">
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                            label="OK" (click)="addVehicule()">
+                                                    </button>
+                                                </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Liste">
+                                            <div class="card">
+                                                <p-table [value]="selectedClient.vehiculeVo" [scrollable]="true"
+                                                        scrollHeight="200px">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                                        <th>Reference</th>
+                                                                        <th>Code verification</th>
+                                                                        <th>Matricule</th>
+                                                                        <th>Cylindree</th>
+                                                                        <th>Version</th>
+                                                                        <th>Poids encharge</th>
+                                                                        <th>Nombre places</th>
+                                                                        <th>Puissance fiscale</th>
+                                                                        <th>Carburant</th>
+                                                                        <th>Type vehicule</th>
+                                                                        <th>Contrat</th>
+                                                                        <th>Marque</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-p>
+                                                        <tr>
+                                                                        <td>{{p.reference}}</td>
+
+                                                                        <td>{{p.codeVerification}}</td>
+
+                                                                        <td>{{p.matricule}}</td>
+
+                                                                        <td>{{p.cylindree}}</td>
+
+                                                                        <td>{{p.version}}</td>
+
+                                                                        <td>{{p.poidsEncharge}}</td>
+
+                                                                        <td>{{p.nombrePlaces}}</td>
+
+                                                                        <td>{{p.puissanceFiscale}}</td>
+
+                                                                    <td>{{p.carburantVo?.libelle}}</td>
+                                                                    <td>{{p.typeVehiculeVo?.libelle}}</td>
+                                                                    <td>{{p.contratVo?.numAttestation}}</td>
+                                                                    <td>{{p.marqueVo?.libelle}}</td>
+                                                            <td>
+                                                                <button (click)="deleteVehicules(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+
+                            <p-tabPanel header="Contrat">
+                                <p-tabView>
+                                    <p-tabPanel header="Création">
+                                        <div class="p-grid">
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="1">Num police<span style="color: red;">*</span></label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Num police"
+                                                                       id="1" [(ngModel)]="selectedContrat.numPolice"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validContratNumPolice}"  >
+                                                                <small class='p-error' *ngIf='!validContratNumPolice'>NumPolice est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="2">Num attestation<span style="color: red;">*</span></label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Num attestation"
+                                                                       id="2" [(ngModel)]="selectedContrat.numAttestation"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validContratNumAttestation}"  >
+                                                                <small class='p-error' *ngIf='!validContratNumAttestation'>NumAttestation est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="3">Date effet<span style="color: red;">*</span></label>
+                                                                <p-calendar id="3"
+                                                                            placeholder="Date effet"
+                                                                        [(ngModel)]="selectedContrat.dateEffet"
+                                                                        dateFormat="{{dateFormat}}" [showIcon]="true"  [ngClass]="{'ng-invalid ng-dirty' : !validContratDateEffet}" ></p-calendar>
+                                                                <small class='p-error' *ngIf='!validContratDateEffet'>DateEffet est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="4">Date echeance<span style="color: red;">*</span></label>
+                                                                <p-calendar id="4"
+                                                                            placeholder="Date echeance"
+                                                                        [(ngModel)]="selectedContrat.dateEcheance"
+                                                                        dateFormat="{{dateFormat}}" [showIcon]="true"  [ngClass]="{'ng-invalid ng-dirty' : !validContratDateEcheance}" ></p-calendar>
+                                                                <small class='p-error' *ngIf='!validContratDateEcheance'>DateEcheance est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="5">Date signature<span style="color: red;">*</span></label>
+                                                                <p-calendar id="5"
+                                                                            placeholder="Date signature"
+                                                                        [(ngModel)]="selectedContrat.dateSignature"
+                                                                        dateFormat="{{dateFormat}}" [showIcon]="true"  [ngClass]="{'ng-invalid ng-dirty' : !validContratDateSignature}" ></p-calendar>
+                                                                <small class='p-error' *ngIf='!validContratDateSignature'>DateSignature est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-12 p-md-4">
+                                                                <label for="6">Periode<span style="color: red;">*</span></label>
+                                                                <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                                       placeholder="Periode"
+                                                                       id="6" [(ngModel)]="selectedContrat.periode"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validContratPeriode}"  >
+                                                                <small class='p-error' *ngIf='!validContratPeriode'>Periode est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-field p-col-11 p-md-3">
+                                                                <label>Quittance prime<span style="color: red;">*</span></label>
+                                                                <p-dropdown [options]="quittancePrimes" [(ngModel)]="selectedContrat.quittancePrimeVo"
+                                                                        id="7"  [filter]="true"
+                                                                        filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="id"
+                                                                        placeholder="Quittance prime"  [ngClass]="{'ng-invalid ng-dirty' : !validContratQuittancePrime}" 
+                                                                >
+                                                                </p-dropdown>
+                                                                <small class='p-error' *ngIf='!validContratQuittancePrime'>QuittancePrime est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button"
+                                                                        icon="pi pi-plus"   (click)="openCreatequittancePrime('quittancePrime')"
+                                                                        class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+
+                                                            <div class="p-field p-col-11 p-md-3">
+                                                                <label>Nature contrat<span style="color: red;">*</span></label>
+                                                                <p-dropdown [options]="natureContrats" [(ngModel)]="selectedContrat.natureContratVo"
+                                                                        id="8"  [filter]="true"
+                                                                        filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="libelle"
+                                                                        placeholder="Nature contrat"  [ngClass]="{'ng-invalid ng-dirty' : !validContratNatureContrat}" 
+                                                                >
+                                                                </p-dropdown>
+                                                                <small class='p-error' *ngIf='!validContratNatureContrat'>NatureContrat est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button"
+                                                                        icon="pi pi-plus"   (click)="openCreatenatureContrat('natureContrat')"
+                                                                        class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+
+                                                            <div class="p-field p-col-11 p-md-3">
+                                                                <label>Vehicule<span style="color: red;">*</span></label>
+                                                                <p-dropdown [options]="vehicules" [(ngModel)]="selectedContrat.vehiculeVo"
+                                                                        id="9"  [filter]="true"
+                                                                        filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="reference"
+                                                                        placeholder="Vehicule"  [ngClass]="{'ng-invalid ng-dirty' : !validContratVehicule}" 
+                                                                >
+                                                                </p-dropdown>
+                                                                <small class='p-error' *ngIf='!validContratVehicule'>Vehicule est obligatoire.</small>
+                                                            </div>
+                                                            <div class="p-col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button"
+                                                                        icon="pi pi-plus"   (click)="openCreatevehicule('vehicule')"
+                                                                        class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+
+                                                            <div class="p-field p-col-12  p-md-4">
+                                                                <label>Garantie<span style="color: red;">*</span></label>
+                                                                <p-multiSelect [options]="contratGarantiesVo" [(ngModel)]="selectedContrat.contratGarantiesVo"
+                                                                        defaultLabel="Selectionner un Garantie"
+                                                                        optionLabel="garantieVo.libelle"  display="chip"></p-multiSelect>
+                                                            </div>
+                                                <div class="p-field p-col-12 p-md-1">
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                            label="OK" (click)="addContrat()">
+                                                    </button>
+                                                </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Liste">
+                                            <div class="card">
+                                                <p-table [value]="selectedClient.contratVo" [scrollable]="true"
+                                                        scrollHeight="200px">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                                        <th>Num police</th>
+                                                                        <th>Num attestation</th>
+                                                                        <th>Date effet</th>
+                                                                        <th>Date echeance</th>
+                                                                        <th>Date signature</th>
+                                                                        <th>Periode</th>
+                                                                        <th>Quittance prime</th>
+                                                                        <th>Nature contrat</th>
+                                                                        <th>Vehicule</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-p>
+                                                        <tr>
+                                                                        <td>{{p.numPolice}}</td>
+
+                                                                        <td>{{p.numAttestation}}</td>
+
+                                                                        <td>{{p.dateEffet | date: dateFormatColumn}}</td>
+
+                                                                        <td>{{p.dateEcheance | date: dateFormatColumn}}</td>
+
+                                                                        <td>{{p.dateSignature | date: dateFormatColumn}}</td>
+
+                                                                        <td>{{p.periode}}</td>
+
+                                                                    <td>{{p.quittancePrimeVo?.id}}</td>
+                                                                    <td>{{p.natureContratVo?.libelle}}</td>
+                                                                    <td>{{p.vehiculeVo?.reference}}</td>
+                                                            <td>
+                                                                <button (click)="deleteContrats(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideCreateDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-type-client-create-agent></app-type-client-create-agent>
+
+                            <app-sinistre-create-agent></app-sinistre-create-agent>
+                            <app-quittance-indemniser-create-agent></app-quittance-indemniser-create-agent>
+                            <app-carburant-create-agent></app-carburant-create-agent>
+                            <app-type-vehicule-create-agent></app-type-vehicule-create-agent>
+                            <app-contrat-create-agent></app-contrat-create-agent>
+                            <app-marque-create-agent></app-marque-create-agent>
+                            <app-quittance-prime-create-agent></app-quittance-prime-create-agent>
+                            <app-nature-contrat-create-agent></app-nature-contrat-create-agent>
+                            <app-vehicule-create-agent></app-vehicule-create-agent>
+
+    </p-dialog>

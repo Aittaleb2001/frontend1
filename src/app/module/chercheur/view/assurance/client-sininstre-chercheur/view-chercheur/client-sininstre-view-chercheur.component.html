@@ -1,0 +1,144 @@
+
+<p-dialog [(visible)]="viewClientSininstreDialog" [style]="{width: '70vw'}"
+        header="Client sininstre" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Client sininstre">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="1">Ref</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Ref"  [(ngModel)]="selectedClientSininstre.ref"
+                                           id="1" [(ngModel)]="selectedClientSininstre.ref"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="2">Num police</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Num police"  [(ngModel)]="selectedClientSininstre.numPolice"
+                                           id="2" [(ngModel)]="selectedClientSininstre.numPolice"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="3">Date sinistre</label>
+                                    <p-calendar id="3" [disabled]="true"
+                                                placeholder="Date sinistre"  [(ngModel)]="selectedClientSininstre.dateSinistre"
+                                            dateFormat="{{dateFormat}}"></p-calendar>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="4">Responsabilite</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Responsabilite"  [(ngModel)]="selectedClientSininstre.responsabilite"
+                                           id="4" [(ngModel)]="selectedClientSininstre.responsabilite"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="5">Num ordre</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="5" [disabled]="true"
+                                                   placeholder="Num ordre"  [(ngModel)]="selectedClientSininstre.numOrdre"
+                                            [(ngModel)]="selectedClientSininstre.numOrdre"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="6">Ref reglement</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Ref reglement"  [(ngModel)]="selectedClientSininstre.refReglement"
+                                           id="6" [(ngModel)]="selectedClientSininstre.refReglement"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="7">Montant expertise</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="7" [disabled]="true"
+                                                   placeholder="Montant expertise"  [(ngModel)]="selectedClientSininstre.montantExpertise"
+                                            [(ngModel)]="selectedClientSininstre.montantExpertise"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="8">Montant indemniser</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="8" [disabled]="true"
+                                                   placeholder="Montant indemniser"  [(ngModel)]="selectedClientSininstre.montantIndemniser"
+                                            [(ngModel)]="selectedClientSininstre.montantIndemniser"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="9">Observation</label>
+                                    <textarea id="9" pInputTextarea rows="5" cols="30" [disabled]="true"
+                                              placeholder="Observation"  [(ngModel)]="selectedClientSininstre.observation"
+                                    ></textarea>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="10">Client</label>
+                                    <p-dropdown [options]="clients" [(ngModel)]="selectedClientSininstre.clientVo"
+                                            id="10" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="cin"
+                                            placeholder="Client">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="11">Sinistre</label>
+                                    <p-dropdown [options]="sinistres" [(ngModel)]="selectedClientSininstre.sinistreVo"
+                                            id="11" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="reference"
+                                            placeholder="Sinistre">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-3">
+                                    <label for="12">Quittance indemniser</label>
+                                    <p-dropdown [options]="quittanceIndemnisers" [(ngModel)]="selectedClientSininstre.quittanceIndemniserVo"
+                                            id="12" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="reference"
+                                            placeholder="Quittance indemniser">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-client-create-chercheur></app-client-create-chercheur>
+            <app-sinistre-create-chercheur></app-sinistre-create-chercheur>
+            <app-quittance-indemniser-create-chercheur></app-quittance-indemniser-create-chercheur>
+
+
+
+</p-dialog>
+
+
+

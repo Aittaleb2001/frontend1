@@ -1,0 +1,171 @@
+        <p-dialog [(visible)]="createClientSininstreDialog" [style]="{width: '70vw'}"
+                header="Client sininstre" [modal]="true"
+                styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="Client sininstre">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="1">Ref<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Ref"
+                                                   id="1" [(ngModel)]="selectedClientSininstre.ref"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstreRef}"  />
+                                            <small class='p-error' *ngIf='!validClientSininstreRef'>Ref est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="2">Num police</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Num police"
+                                                   id="2" [(ngModel)]="selectedClientSininstre.numPolice"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="3">Date sinistre<span style="color: red;">*</span></label>
+                                            <p-calendar id="3"
+                                                        placeholder="Date sinistre"  [(ngModel)]="selectedClientSininstre.dateSinistre"
+                                                    dateFormat="{{dateFormat}}" [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstreDateSinistre}"  >
+                                            </p-calendar>
+                                            <small class='p-error' *ngIf='!validClientSininstreDateSinistre'>DateSinistre est obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="4">Responsabilite</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Responsabilite"
+                                                   id="4" [(ngModel)]="selectedClientSininstre.responsabilite"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="5">Num ordre</label>
+                                            <p-inputNumber class="p-mb-2 p-mr-2" id="5"
+                                                           placeholder="Num ordre"
+                                                    [(ngModel)]="selectedClientSininstre.numOrdre"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="6">Ref reglement</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Ref reglement"
+                                                   id="6" [(ngModel)]="selectedClientSininstre.refReglement"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="7">Montant expertise<span style="color: red;">*</span></label>
+                                            <p-inputNumber class="p-mb-2 p-mr-2" id="7"
+                                                           placeholder="Montant expertise"
+                                                    [(ngModel)]="selectedClientSininstre.montantExpertise" [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstreMontantExpertise}"  >
+                                            </p-inputNumber>
+                                            <small class='p-error' *ngIf='!validClientSininstreMontantExpertise'>MontantExpertise est obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="8">Montant indemniser<span style="color: red;">*</span></label>
+                                            <p-inputNumber class="p-mb-2 p-mr-2" id="8"
+                                                           placeholder="Montant indemniser"
+                                                    [(ngModel)]="selectedClientSininstre.montantIndemniser" [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstreMontantIndemniser}"  >
+                                            </p-inputNumber>
+                                            <small class='p-error' *ngIf='!validClientSininstreMontantIndemniser'>MontantIndemniser est obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-3">
+                                            <label for="9">Observation<span style="color: red;">*</span></label>
+                                            <textarea id="9" pInputTextarea rows="5" cols="30"
+                                                      placeholder="Observation"  [(ngModel)]="selectedClientSininstre.observation"
+                                            [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstreObservation}"  ></textarea>
+                                            <small class='p-error' *ngIf='!validClientSininstreObservation'>Observation est obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-11 p-md-2">
+                                            <label for="10">Client<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="clients" [(ngModel)]="selectedClientSininstre.clientVo"
+                                                    id="10" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="cin"
+                                                    placeholder="Client" [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstreClient}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validClientSininstreClient'>Client est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreateclient('client')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-11 p-md-2">
+                                            <label for="11">Sinistre<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="sinistres" [(ngModel)]="selectedClientSininstre.sinistreVo"
+                                                    id="11" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="reference"
+                                                    placeholder="Sinistre" [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstreSinistre}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validClientSininstreSinistre'>Sinistre est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatesinistre('sinistre')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-11 p-md-2">
+                                            <label for="12">Quittance indemniser<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="quittanceIndemnisers" [(ngModel)]="selectedClientSininstre.quittanceIndemniserVo"
+                                                    id="12" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="reference"
+                                                    placeholder="Quittance indemniser" [ngClass]="{'ng-invalid ng-dirty' : !validClientSininstreQuittanceIndemniser}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validClientSininstreQuittanceIndemniser'>QuittanceIndemniser est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatequittanceIndemniser('quittanceIndemniser')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideCreateDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-client-create-admin></app-client-create-admin>
+                    <app-sinistre-create-admin></app-sinistre-create-admin>
+                    <app-quittance-indemniser-create-admin></app-quittance-indemniser-create-admin>
+
+
+    </p-dialog>

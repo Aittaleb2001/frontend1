@@ -1,0 +1,97 @@
+
+<p-dialog [(visible)]="viewQuittancePrimeDialog" [style]="{width: '70vw'}"
+        header="Quittance prime" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Quittance prime">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="1">Prime nette</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="1" [disabled]="true"
+                                                   placeholder="Prime nette"  [(ngModel)]="selectedQuittancePrime.primeNette"
+                                            [(ngModel)]="selectedQuittancePrime.primeNette"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="2">Taxe</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="2" [disabled]="true"
+                                                   placeholder="Taxe"  [(ngModel)]="selectedQuittancePrime.taxe"
+                                            [(ngModel)]="selectedQuittancePrime.taxe"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="3">Accessoires</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Accessoires"  [(ngModel)]="selectedQuittancePrime.accessoires"
+                                           id="3" [(ngModel)]="selectedQuittancePrime.accessoires"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="4">Total ttc</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="4" [disabled]="true"
+                                                   placeholder="Total ttc"  [(ngModel)]="selectedQuittancePrime.totalTtc"
+                                            [(ngModel)]="selectedQuittancePrime.totalTtc"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="5">Total quittance</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="5" [disabled]="true"
+                                                   placeholder="Total quittance"  [(ngModel)]="selectedQuittancePrime.totalQuittance"
+                                            [(ngModel)]="selectedQuittancePrime.totalQuittance"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="6">Total paye</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="6" [disabled]="true"
+                                                   placeholder="Total paye"  [(ngModel)]="selectedQuittancePrime.totalPaye"
+                                            [(ngModel)]="selectedQuittancePrime.totalPaye"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="7">Rest</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="7" [disabled]="true"
+                                                   placeholder="Rest"  [(ngModel)]="selectedQuittancePrime.rest"
+                                            [(ngModel)]="selectedQuittancePrime.rest"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="8">Contrat</label>
+                                    <p-dropdown [options]="contrats" [(ngModel)]="selectedQuittancePrime.contratVo"
+                                            id="8" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="numAttestation"
+                                            placeholder="Contrat">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-contrat-create-admin></app-contrat-create-admin>
+
+
+
+</p-dialog>
+
+
+

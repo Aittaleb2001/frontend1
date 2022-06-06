@@ -1,0 +1,284 @@
+
+<p-dialog [(visible)]="viewClientDialog" [style]="{width: '70vw'}"
+        header="Client" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Client">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="1">Reference</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Reference"  [(ngModel)]="selectedClient.reference"
+                                           id="1" [(ngModel)]="selectedClient.reference"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="2">Cin</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Cin"  [(ngModel)]="selectedClient.cin"
+                                           id="2" [(ngModel)]="selectedClient.cin"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="3">Nom</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Nom"  [(ngModel)]="selectedClient.nom"
+                                           id="3" [(ngModel)]="selectedClient.nom"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="4">Prenom</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Prenom"  [(ngModel)]="selectedClient.prenom"
+                                           id="4" [(ngModel)]="selectedClient.prenom"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="5">Activite</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Activite"  [(ngModel)]="selectedClient.activite"
+                                           id="5" [(ngModel)]="selectedClient.activite"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="6">Adresse</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Adresse"  [(ngModel)]="selectedClient.adresse"
+                                           id="6" [(ngModel)]="selectedClient.adresse"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="7">Datede naissance</label>
+                                    <p-calendar id="7" [disabled]="true"
+                                                placeholder="Datede naissance"  [(ngModel)]="selectedClient.datedeNaissance"
+                                            dateFormat="{{dateFormat}}"></p-calendar>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="8">Num telephone</label>
+                                    <p-inputNumber class="p-mb-2 p-mr-2" id="8" [disabled]="true"
+                                                   placeholder="Num telephone"  [(ngModel)]="selectedClient.numTelephone"
+                                            [(ngModel)]="selectedClient.numTelephone"></p-inputNumber>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="9">Type client</label>
+                                    <p-dropdown [options]="typeClients" [(ngModel)]="selectedClient.typeClientVo"
+                                            id="9" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="libelle"
+                                            placeholder="Type client">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+                    <p-tabPanel header="Client sininstres">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedClient.clientSininstresVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Ref</th>
+                                                            <th>Num police</th>
+                                                            <th>Date sinistre</th>
+                                                            <th>Responsabilite</th>
+                                                            <th>Num ordre</th>
+                                                            <th>Ref reglement</th>
+                                                            <th>Montant expertise</th>
+                                                            <th>Montant indemniser</th>
+                                                            <th>Observation</th>
+                                                            <th>Sinistre</th>
+                                                            <th>Quittance indemniser</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                            <td>{{p.ref}}</td>
+
+                                                            <td>{{p.numPolice}}</td>
+
+                                                            <td>{{p.dateSinistre | date: dateFormatColumn}}</td>
+
+                                                            <td>{{p.responsabilite}}</td>
+
+                                                            <td>{{p.numOrdre}}</td>
+
+                                                            <td>{{p.refReglement}}</td>
+
+                                                            <td>{{p.montantExpertise}}</td>
+
+                                                            <td>{{p.montantIndemniser}}</td>
+
+                                                            <td>{{p.observation}}</td>
+
+                                                        <td>{{p.sinistreVo?.reference}}</td>
+                                                        <td>{{p.quittanceIndemniserVo?.reference}}</td>
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Vehicule">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedClient.vehiculeVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Reference</th>
+                                                            <th>Code verification</th>
+                                                            <th>Matricule</th>
+                                                            <th>Cylindree</th>
+                                                            <th>Version</th>
+                                                            <th>Poids encharge</th>
+                                                            <th>Nombre places</th>
+                                                            <th>Puissance fiscale</th>
+                                                            <th>Carburant</th>
+                                                            <th>Type vehicule</th>
+                                                            <th>Contrat</th>
+                                                            <th>Marque</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                            <td>{{p.reference}}</td>
+
+                                                            <td>{{p.codeVerification}}</td>
+
+                                                            <td>{{p.matricule}}</td>
+
+                                                            <td>{{p.cylindree}}</td>
+
+                                                            <td>{{p.version}}</td>
+
+                                                            <td>{{p.poidsEncharge}}</td>
+
+                                                            <td>{{p.nombrePlaces}}</td>
+
+                                                            <td>{{p.puissanceFiscale}}</td>
+
+                                                        <td>{{p.carburantVo?.libelle}}</td>
+                                                        <td>{{p.typeVehiculeVo?.libelle}}</td>
+                                                        <td>{{p.contratVo?.numAttestation}}</td>
+                                                        <td>{{p.marqueVo?.libelle}}</td>
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Contrat">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedClient.contratVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Num police</th>
+                                                            <th>Num attestation</th>
+                                                            <th>Date effet</th>
+                                                            <th>Date echeance</th>
+                                                            <th>Date signature</th>
+                                                            <th>Periode</th>
+                                                            <th>Quittance prime</th>
+                                                            <th>Nature contrat</th>
+                                                            <th>Vehicule</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                            <td>{{p.numPolice}}</td>
+
+                                                            <td>{{p.numAttestation}}</td>
+
+                                                            <td>{{p.dateEffet | date: dateFormatColumn}}</td>
+
+                                                            <td>{{p.dateEcheance | date: dateFormatColumn}}</td>
+
+                                                            <td>{{p.dateSignature | date: dateFormatColumn}}</td>
+
+                                                            <td>{{p.periode}}</td>
+
+                                                        <td>{{p.quittancePrimeVo?.id}}</td>
+                                                        <td>{{p.natureContratVo?.libelle}}</td>
+                                                        <td>{{p.vehiculeVo?.reference}}</td>
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-type-client-create-gestionnaire></app-type-client-create-gestionnaire>
+
+                    <app-sinistre-create-gestionnaire></app-sinistre-create-gestionnaire>
+                    <app-quittance-indemniser-create-gestionnaire></app-quittance-indemniser-create-gestionnaire>
+                    <app-carburant-create-gestionnaire></app-carburant-create-gestionnaire>
+                    <app-type-vehicule-create-gestionnaire></app-type-vehicule-create-gestionnaire>
+                    <app-contrat-create-gestionnaire></app-contrat-create-gestionnaire>
+                    <app-marque-create-gestionnaire></app-marque-create-gestionnaire>
+                    <app-quittance-prime-create-gestionnaire></app-quittance-prime-create-gestionnaire>
+                    <app-nature-contrat-create-gestionnaire></app-nature-contrat-create-gestionnaire>
+                    <app-vehicule-create-gestionnaire></app-vehicule-create-gestionnaire>
+
+
+</p-dialog>
+
+
+
